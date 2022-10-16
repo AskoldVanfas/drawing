@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 import com.example.drawing.R
+import com.example.drawing.feature.screen.tools.Tool
 import kotlin.math.*
 
 class CustomDrawView @JvmOverloads constructor(
@@ -51,22 +52,32 @@ class CustomDrawView @JvmOverloads constructor(
         strokeWidth = STROKE_WIDTH // default: Hairline-width (really thin)
     }
 
-    fun render(state: CanvasViewState) {
-        drawColor = ResourcesCompat.getColor(resources, state.color.value, null)
+    fun render(state: ViewState) {
+        //drawColor = ResourcesCompat.getColor(resources, state.color.value, null)
         paint.color = drawColor
-        /*paint.strokeWidth = state.size.value.toFloat()
-        if (state.tools == TOOLS.DASH) {
+        // paint.strokeWidth = state.size.value.toFloat()
+
+        if (state.tools.firstOrNull {
+            it.isSelected
+        }?.tool == Tool.DOTTED) {
             paint.pathEffect = DashPathEffect(
+//                floatArrayOf(
+//                    state.size.value.toFloat() * 2,
+//                    state.size.value.toFloat() * 2,
+//                    state.size.value.toFloat() * 2,
+//                    state.size.value.toFloat() * 2
+//                ),
                 floatArrayOf(
-                    state.size.value.toFloat() * 2,
-                    state.size.value.toFloat() * 2,
-                    state.size.value.toFloat() * 2,
-                    state.size.value.toFloat() * 2
-                ), 0f
+                    20f * 2,
+                    20f * 2,
+                    20f * 2,
+                    20f * 2
+                ),
+                0f
             )
         } else {
             paint.pathEffect = null
-        }*/
+        }
     }
     fun clear() {
         extraCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
