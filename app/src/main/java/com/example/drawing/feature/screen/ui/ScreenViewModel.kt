@@ -18,8 +18,8 @@ class ScreenViewModel() : BaseViewModel<ViewState>() {
             is UiEvent.SelectedItem -> {
                 previousState.copy(tools = previousState.tools.map {
                     if (it == event.item) {
-                    it.copy(isSelected = !event.item.isSelected)
-                    }else it
+                        it.copy(isSelected = !it.isSelected)
+                    } else it.copy(isSelected = false)
                 })
             }
             else -> {
